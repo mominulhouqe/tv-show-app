@@ -101,7 +101,7 @@ const ShowDetails = () => {
                   onClick={() => handleBookNow(id)}
                   disabled={isButtonDisabled}
                 >
-                  {isButtonDisabled ? 'Booked' : 'Book Now'}
+                  {isButtonDisabled ? 'Already Booked' : 'Book Now'}
                 </Button>
 
               </div>
