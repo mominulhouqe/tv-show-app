@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { ToastContainer, toast } from 'react-toastify';
@@ -6,10 +6,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import './showDetails.css';
 import Menu from '../Home/Menu';
-import { Link } from 'react-router-dom';
 
 const ShowDetails = () => {
   const showDetails = JSON.parse(localStorage.getItem('showDetails'));
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  useEffect(() => {
+    setIsButtonDisabled(false); // Reset the isButtonDisabled state when the component mounts or updates
+  }, [showDetails]);
 
   if (!showDetails) {
     // Handle the case when showDetails is null
@@ -29,21 +34,19 @@ const ShowDetails = () => {
     status,
   } = showDetails;
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  
   const handleBookNow = () => {
     const existingCart = localStorage.getItem('cart');
     let cart = [];
-  
+
     if (existingCart) {
       cart = JSON.parse(existingCart);
     }
-  
+
     const isItemAlreadyAdded = cart.some((item) => item.id === id);
-  
+
     if (isItemAlreadyAdded) {
       toast.error('You have already added!');
-      setIsButtonDisabled(true);
+      
     } else {
       toast.success('Your movie was successfully added!');
       cart.push(showDetails);
@@ -51,7 +54,7 @@ const ShowDetails = () => {
       setIsButtonDisabled(true);
     }
   };
-  
+
   return (
     <div>
       <div className="container">
@@ -103,7 +106,6 @@ const ShowDetails = () => {
                 >
                   {isButtonDisabled ? 'Already Booked' : 'Book Now'}
                 </Button>
-
               </div>
             </div>
           </Card.Body>
