@@ -1,0 +1,5 @@
+
+  .text-container {
+    flex-grow: 1; /* Allow the text container to expand and fill the remaining space */
+  }
+  

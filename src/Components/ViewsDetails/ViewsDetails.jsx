@@ -6,11 +6,16 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
 const ViewsDetails = ({ show }) => {
-  const { name, image, rating, summary } = show;
+  const { id, name, image, rating, summary } = show;
   const [showFullSummary, setShowFullSummary] = useState(false);
 
   const toggleSummary = () => {
     setShowFullSummary(!showFullSummary);
+  };
+
+  const handleWatchNow = () => {
+    // Save the component data to localStorage
+    localStorage.setItem('showDetails', JSON.stringify(show));
   };
 
   return (
@@ -33,8 +38,10 @@ const ViewsDetails = ({ show }) => {
                 <Card.Text>
                   <small className="text-muted">Rating: {rating.average}</small>
                 </Card.Text>
-                <Link to="/watch">
-                  <Button variant="primary">Watch Now</Button>
+                <Link to={`/watch`}>
+                  <Button variant="primary" onClick={handleWatchNow}>
+                    Watch Now
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>
