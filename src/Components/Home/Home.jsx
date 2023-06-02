@@ -1,11 +1,12 @@
 import React from 'react';
 import ShowList from '../ShowList/ShowList';
-// import Navbar from './Navbar';
+import Menu from './Menu';
 
 const Home = () => {
     return (
         <div>
-            <Navbar></Navbar>
+          <Menu></Menu>
+ 
             <ShowList></ShowList>
 
             

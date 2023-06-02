@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import ViewsDetails from '../ViewsDetails/ViewsDetails';
+import Menu from '../Home/Menu';
 
 const ShowList = ({ onItemClick }) => {
   const [shows, setShows] = useState([]);
@@ -17,23 +18,15 @@ const ShowList = ({ onItemClick }) => {
   };
 
   return (
-    <div>
-      <h2>Show List</h2>
+    <div className='container'>
+      
+      <h2 className='text-center my-3 p-5 fw-bold bg-light '>Movies Category</h2>
       <div className='row'>
         {shows.map((show) => <ViewsDetails 
         key={show.show.id}
         show={show.show}
         ></ViewsDetails> )}
       </div>
-{/* 
-
- <li key={show.show.id}>
-            <img src={show.show.image.medium} alt="" />
-            <h3>{show.show.name}</h3>
-            <p>{show.show.summary}</p>
-            <button onClick={() => handleItemClick(show)}>View Details</button>
-          </li>
-*/}
 
 
       

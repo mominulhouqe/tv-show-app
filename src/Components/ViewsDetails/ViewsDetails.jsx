@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import Menu from '../Home/Menu';
 
 const ViewsDetails = ({ show }) => {
   const { id, name, image, rating, summary } = show;
@@ -20,6 +21,7 @@ const ViewsDetails = ({ show }) => {
 
   return (
     <div>
+      
       <Row xs={1} md={4} className="g-4 mb-4">
         {Array.from({ length: 4 }).map((_, idx) => (
           <Col key={idx}>
