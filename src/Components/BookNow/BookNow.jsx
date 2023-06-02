@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Menu from '../Home/Menu';
 
 const BookNow = () => {
     // Retrieve the stored data from local storage
@@ -24,12 +25,10 @@ const BookNow = () => {
 
     return (
         <div>
-
             <div>
-
-
-                <div className="container my-5 show-details-container">
-                    <div className="show-details-card">
+                <div className="container ">
+                    <Menu></Menu>
+                    <div className="show-details-card container mx-auto">
 
                         <div className="show-details-content">
                             <div className="d-flex flex-wrap justify-content-center">
