@@ -9,66 +9,65 @@ const BookNow = () => {
   const [showDetails, setShowDetails] = useState([]);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
     setShowDetails(cart);
   }, []);
-
-  if (showDetails.length === 0) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
       <div className="container">
         <Menu />
         <div>
-          <h2 className='fw-bold py-5 text-center bg-light'>Your Booked List : {showDetails.length}</h2>
+          <h2 className="fw-bold py-5 text-center bg-light">Your Booked List:</h2>
         </div>
-        {showDetails.map((item) => (
-          <Card className="show-details-card flex container mx-auto" key={item.id}>
-      
-            <Card.Body className="show-details-content">
-              <div className="row">
-                <div className=" d-flex text-center align-items-center justify-content-center">
-                  <Card.Img
-                    className="img-fluid show-details-image"
-                    variant="right"
-                    src={item.image?.medium}
-                    alt={item.name}
-                  />
-                </div>
-                <div className="">
-                  <Card.Title className="show-details-title">
-                    {item.name ? `Movie Name: ${item.name}` : 'Movie Name Not Available'}
-                  </Card.Title>
-                  <Card.Text className="show-details-summary">Summary: {item.summary}</Card.Text>
-                  <div className="show-details-details">
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Genres:</span> {item.genres?.join(', ')}
-                    </div>
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Language:</span> {item.language}
-                    </div>
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Network:</span>{' '}
-                      {item.network?.name || 'Not Available'}
-                    </div>
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Premiered:</span> {item.premiered}
-                    </div>
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Status:</span> {item.status}
-                    </div>
-                    <div className="show-details-details-item">
-                      <span className="show-details-details-label">Rating:</span>{' '}
-                      {item.rating?.average || 'Not Available'}
+        {showDetails.length === 0 ? (
+          <div>No booked items available.</div>
+        ) : (
+          showDetails.map((item) => (
+            <Card className="show-details-card flex container mx-auto" key={item.id}>
+              <Card.Body className="show-details-content">
+                <div className="row">
+                  <div className="d-flex text-center align-items-center justify-content-center">
+                    <Card.Img
+                      className="img-fluid show-details-image"
+                      variant="right"
+                      src={item.image?.medium}
+                      alt={item.name}
+                    />
+                  </div>
+                  <div className="">
+                    <Card.Title className="show-details-title">
+                      {item.name ? `Movie Name: ${item.name}` : 'Movie Name Not Available'}
+                    </Card.Title>
+                    <Card.Text className="show-details-summary">Summary: {item.summary}</Card.Text>
+                    <div className="show-details-details">
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Genres:</span> {item.genres?.join(', ')}
+                      </div>
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Language:</span> {item.language}
+                      </div>
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Network:</span>{' '}
+                        {item.network?.name || 'Not Available'}
+                      </div>
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Premiered:</span> {item.premiered}
+                      </div>
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Status:</span> {item.status}
+                      </div>
+                      <div className="show-details-details-item">
+                        <span className="show-details-details-label">Rating:</span>{' '}
+                        {item.rating?.average || 'Not Available'}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </Card.Body>
-          </Card>
-        ))}
+              </Card.Body>
+            </Card>
+          ))
+        )}
         <ToastContainer />
       </div>
     </div>
