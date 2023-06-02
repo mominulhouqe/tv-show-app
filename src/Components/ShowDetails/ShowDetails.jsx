@@ -5,11 +5,16 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './showDetails.css';
-import BookNow from '../BookNow/BookNow';
 import Menu from '../Home/Menu';
+import { Link } from 'react-router-dom';
 
 const ShowDetails = () => {
   const showDetails = JSON.parse(localStorage.getItem('showDetails'));
+
+  if (!showDetails) {
+    // Handle the case when showDetails is null
+    return <div>Loading...</div>;
+  }
 
   const {
     id,
@@ -24,37 +29,42 @@ const ShowDetails = () => {
     status,
   } = showDetails;
 
-  const [bookingData, setBookingData] = useState(null);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleBookNow = () => {
-    // Add the show details to the local storage
-    localStorage.setItem('bookingData', JSON.stringify(showDetails));
+    const existingCart = localStorage.getItem('cart');
+    let cart = [];
 
-    // Update the state to trigger re-rendering and display the <BookNow /> component
-    setBookingData(showDetails);
+    if (existingCart) {
+      cart = JSON.parse(existingCart);
+    }
 
-    // Show a toast message
-    toast.success('Show booked successfully!');
+    const isItemAlreadyAdded = cart.some((item) => item.id === id);
 
-    // Disable the "Book Now" button
-    setIsButtonDisabled(true);
+    if (isItemAlreadyAdded) {
+      toast.error('You have already applied. You cannot apply more!');
+    } else {
+      toast.success('Your application was successfully done!');
+      cart.push(showDetails);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setIsButtonDisabled(true);
+    }
   };
 
   return (
     <div>
-      <div className="container ">
-     <Menu></Menu>
-
+      <div className="container">
+        <Menu />
         <Card className="show-details-card container mx-auto">
           <Card.Header className="show-details-header">Featured</Card.Header>
           <Card.Body className="show-details-content">
-            <div className="row ">
+            <div className="row">
               <div className="col-md-4 d-flex text-center align-items-center justify-content-center">
                 <Card.Img
                   className="img-fluid show-details-image"
                   variant="right"
                   src={image?.medium}
+                  alt={name}
                 />
               </div>
               <div className="col-md-8">
@@ -87,11 +97,12 @@ const ShowDetails = () => {
                 <Button
                   className="show-details-button"
                   variant="primary"
-                  onClick={handleBookNow}
+                  onClick={() => handleBookNow(id)}
                   disabled={isButtonDisabled}
                 >
                   {isButtonDisabled ? 'Booked' : 'Book Now'}
                 </Button>
+
               </div>
             </div>
           </Card.Body>

@@ -21,7 +21,6 @@ const ViewsDetails = ({ show }) => {
 
   return (
     <div>
-      
       <Row xs={1} md={4} className="g-4 mb-4">
         {Array.from({ length: 4 }).map((_, idx) => (
           <Col key={idx}>
@@ -40,7 +39,7 @@ const ViewsDetails = ({ show }) => {
                 <Card.Text>
                   <small className="text-muted">Rating: {rating.average}</small>
                 </Card.Text>
-                <Link to={`/watch`}>
+                <Link to={`/watch/${id}`}>
                   <Button variant="primary" onClick={handleWatchNow}>
                     Watch Now
                   </Button>
