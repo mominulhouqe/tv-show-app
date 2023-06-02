@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from './App';
 import ShowDetails from './Components/ShowDetails/ShowDetails';
+import BookNow from './Components/BookNow/BookNow';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
   {
     path: "watch",
     element: <ShowDetails />,
+  },
+  {
+    path:"booking",
+    element:<BookNow />
   }
 ]);
 

@@ -5,7 +5,7 @@ import ShowList from '../ShowList/ShowList';
 const Home = () => {
     return (
         <div>
-            {/* <Navbar></Navbar> */}
+            <Navbar></Navbar>
             <ShowList></ShowList>
 
             
