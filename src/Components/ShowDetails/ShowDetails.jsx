@@ -30,27 +30,28 @@ const ShowDetails = () => {
   } = showDetails;
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  
   const handleBookNow = () => {
     const existingCart = localStorage.getItem('cart');
     let cart = [];
-
+  
     if (existingCart) {
       cart = JSON.parse(existingCart);
     }
-
+  
     const isItemAlreadyAdded = cart.some((item) => item.id === id);
-
+  
     if (isItemAlreadyAdded) {
-      toast.error('You have already applied. You cannot apply more!');
+      toast.error('You have already added!');
+      setIsButtonDisabled(true);
     } else {
-      toast.success('Your application was successfully done!');
+      toast.success('Your movie was successfully added!');
       cart.push(showDetails);
       localStorage.setItem('cart', JSON.stringify(cart));
       setIsButtonDisabled(true);
     }
   };
-
+  
   return (
     <div>
       <div className="container">

@@ -21,9 +21,12 @@ const BookNow = () => {
     <div>
       <div className="container">
         <Menu />
+        <div>
+          <h2 className='fw-bold py-5 text-center bg-light'>Your Booked List : {showDetails.length}</h2>
+        </div>
         {showDetails.map((item) => (
-          <Card className="show-details-card container mx-auto" key={item.id}>
-            <Card.Header className="show-details-header">Featured</Card.Header>
+          <Card className="show-details-card flex container mx-auto" key={item.id}>
+      
             <Card.Body className="show-details-content">
               <div className="row">
                 <div className=" d-flex text-center align-items-center justify-content-center">
